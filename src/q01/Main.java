@@ -4,14 +4,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt()
-        // Upper half (including middle line)
+        // Upper part
         for (int i = 1; i <= n; i++) {
-            // leading spaces
+
+            // spaces before
             for (int j = 1; j <= n - i; j++) {
                 System.out.print(" ");
             }
 
-            // stars and inner spaces
+            // hollow stars
             for (int j = 1; j <= 2 * i - 1; j++) {
                 if (j == 1 || j == 2 * i - 1) {
                     System.out.print("*");
@@ -23,14 +24,13 @@ public class Main {
             System.out.println();
         }
 
-        // Lower half
+        // Lower part
         for (int i = n - 1; i >= 1; i--) {
-            // leading spaces
+
             for (int j = 1; j <= n - i; j++) {
                 System.out.print(" ");
             }
 
-            // stars and inner spaces
             for (int j = 1; j <= 2 * i - 1; j++) {
                 if (j == 1 || j == 2 * i - 1) {
                     System.out.print("*");
@@ -43,12 +43,10 @@ public class Main {
         }
     }
 }
-        
+            
+     
     
-        // Rules:
-        //   - Only border cells have '*', inside is spaces
-        //   - No trailing spaces on any line
-        //
+        
         // Input: 4
         // Output:
         //    *
