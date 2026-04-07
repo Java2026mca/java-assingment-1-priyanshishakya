@@ -6,16 +6,22 @@ public class Main {
         int n = sc.nextInt();
         
         for (int row = 0; row < n; row++) {
+            long c = 1;  // Current binomial coefficient
+            
             // Print left 1
             System.out.print("1");
             
-            // Print middle using binomial coefficient property
-            for (int j = 1; j < row; j++) {
-                // C(row, j) = row! / (j! * (row-j)!)
-                // Use multiplicative formula to avoid overflow
-                long current = 1L * (row - j + 1) / j * prev;
-                System.out.print(" " + current);
-                prev = current;
+            // Print middle coefficients
+            for (int j = 1; j <= row/2; j++) {
+                // C(row, j) = C(row, j-1) * (row-j+1) / j
+                c = c * (row - j + 1) / j;
+                System.out.print(" " + c);
+            }
+            
+            // Print right half (symmetric) - skip middle for odd rows
+            for (int j = row/2 + 1; j < row; j++) {
+                System.out.print(" " + c);
+                c = c * j / (row - j + 1);
             }
             
             // Print right 1
