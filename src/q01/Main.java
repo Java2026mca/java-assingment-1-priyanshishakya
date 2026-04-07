@@ -3,8 +3,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-
+        int n = sc.nextInt()
         // Upper half (including middle line)
         for (int i = 1; i <= n; i++) {
             // leading spaces
@@ -44,9 +43,8 @@ public class Main {
         }
     }
 }
-
-//TODO: Print a hollow diamond pattern of half-height n using '*'
-        //
+        
+    
         // Rules:
         //   - Only border cells have '*', inside is spaces
         //   - No trailing spaces on any line
