@@ -6,14 +6,18 @@ public class Main {
         int n = sc.nextInt();
         
         for (int row = 0; row < n; row++) {
-            
             int current = 1;
             System.out.print(current);
             
-           
+            // Print middle elements
             for (int col = 1; col < row; col++) {
                 current = current * (row - col) / col;
                 System.out.print(" " + current);
+            }
+            
+            // Print right edge 1 (for rows with ≥2 elements)
+            if (row >= 1) {
+                System.out.print(" 1");
             }
             
             System.out.println();
@@ -22,7 +26,6 @@ public class Main {
         sc.close();
     }
 }
-
         // TODO: Print Pascal's Triangle for n rows
         //       Values on each row separated by single space
         //       No leading or trailing spaces
