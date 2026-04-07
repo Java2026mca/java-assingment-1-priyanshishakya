@@ -4,18 +4,31 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-
-        // TODO: Print Pascal's Triangle for n rows
-        //       Values on each row separated by single space
-        //       No leading or trailing spaces
-        //
-        // Input: 5
-        // Output:
-        // 1
-        // 1 1
-        // 1 2 1
-        // 1 3 3 1
-        // 1 4 6 4 1
-
+        
+      
+        for (int row = 0; row < n; row++) {
+            int prevAboveLeft = 1;
+            int prevAboveRight = 1;
+            
+         
+            System.out.print("1");
+            
+           
+            for (int j = 1; j < row; j++) {
+                int current = prevAboveLeft + prevAboveRight;
+                System.out.print(" " + current);
+                prevAboveLeft = prevAboveRight;
+                prevAboveRight = current;
+            }
+            
+          
+            if (row > 0) {
+                System.out.print(" 1");
+            }
+            
+            System.out.println();
+        }
+        
+        sc.close();
     }
 }
