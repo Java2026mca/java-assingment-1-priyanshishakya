@@ -1,58 +1,53 @@
-import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in); 
-        int n = sc.nextInt();
-        
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        if (line == null || line.isEmpty()) return;
+
+        int n = Integer.parseInt(line.trim());
         int[][] matrix = new int[n][n];
-        int num = 1;
         
-        int top = 0, bottom = n - 1, left = 0, right = n - 1;
-        
-        while (num <= n * n) {
-            
-            for (int col = left; col <= right && num <= n * n; col++) {
-                matrix[top][col] = num++;
-            }
+        int value = 1;
+        int top = 0, bottom = n - 1;
+        int left = 0, right = n - 1;
+
+        while (value <= n * n) {
+            // Left to Right
+            for (int i = left; i <= right; i++) matrix[top][i] = value++;
             top++;
-            
-            
-            for (int row = top; row <= bottom && num <= n * n; row++) {
-                matrix[row][right] = num++;
-            }
+
+            // Top to Bottom
+            for (int i = top; i <= bottom; i++) matrix[i][right] = value++;
             right--;
-            
-           
-            for (int col = right; col >= left && num <= n * n; col--) {
-                matrix[bottom][col] = num++;
+
+            // Right to Left
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) matrix[bottom][i] = value++;
+                bottom--;
             }
-            bottom--;
-            
-           
-            for (int row = bottom; row >= top && num <= n * n; row--) {
-                matrix[row][left] = num++;
+
+            // Bottom to Top
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) matrix[i][left] = value++;
+                left++;
             }
-            left++;
         }
-        
-      
+
+        // Print Matrix and Calculate Diagonal Sum
+        long diagonalSum = 0;
         for (int i = 0; i < n; i++) {
+            StringBuilder rowStr = new StringBuilder();
             for (int j = 0; j < n; j++) {
-                System.out.print(matrix[i][j]);
-                if (j < n - 1) System.out.print(" ");
+                rowStr.append(matrix[i][j]);
+                if (j < n - 1) rowStr.append(" ");
+                if (i == j) diagonalSum += matrix[i][j];
             }
-            System.out.println();
+            System.out.println(rowStr.toString());
         }
         
-        
-        int diagonalSum = 0;
-        for (int i = 0; i < n; i++) {
-            diagonalSum += matrix[i][i];
-        }
         System.out.println("Diagonal: " + diagonalSum);
-        
-        sc.close();
     }
 }
         // TODO: Fill an N×N matrix in clockwise spiral order starting from 1
