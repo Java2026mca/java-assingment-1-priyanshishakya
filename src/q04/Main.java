@@ -1,51 +1,50 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        
-        for (int i = 0; i < n; i++) {
-            int num = sc.nextInt();
-            
-            boolean isPrime = isPrime(num);
-            boolean isPerfect = isPerfect(num);
-            
-            if (isPrime && isPerfect) {
-                System.out.println("Both");
-            } else if (isPrime) {
-                System.out.println("Prime");
-            } else if (isPerfect) {
-                System.out.println("Perfect");
-            } else {
-                System.out.println("Neither");
-            }
+        if (!sc.hasNextInt()) return;
+
+        int count = sc.nextInt();
+        for (int i = 0; i < count; i++) {
+            if (!sc.hasNextLong()) break;
+            long num = sc.nextLong();
+            System.out.println(checkNumber(num));
         }
-        
-        sc.close();
     }
-    
-    private static boolean isPrime(int num) {
-        if (num < 2) return false;
-        for (int i = 2; i * i <= num; i++) {
-            if (num % i == 0) return false;
+
+    private static String checkNumber(long n) {
+        if (n <= 1) return "Neither";
+
+        if (isPerfect(n)) return "Perfect";
+        if (isPrime(n)) return "Prime";
+        
+        return "Neither";
+    }
+
+    private static boolean isPrime(long n) {
+        if (n < 2) return false;
+        if (n == 2 || n == 3) return true;
+        if (n % 2 == 0 || n % 3 == 0) return false;
+        for (long i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
         }
         return true;
     }
-    
-    private static boolean isPerfect(int num) {
-        if (num < 1) return false;
-        
-        int sum = 1;  
-        for (int i = 2; i * i <= num; i++) {
-            if (num % i == 0) {
+
+    private static boolean isPerfect(long n) {
+        if (n < 6) return false;
+        long sum = 1;
+        for (long i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
                 sum += i;
-                if (i != num / i && num / i != num) {
-                    sum += num / i;
+                if (i * i != n) {
+                    sum += n / i;
                 }
             }
         }
-        return sum == num;
+        return sum == n;
     }
 }
 
