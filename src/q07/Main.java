@@ -11,7 +11,7 @@ public class Main {
             arr[i] = sc.nextInt();
         }
         
-       
+    
         int swaps = 0;
         for (int i = 0; i < n - 1; i++) {
             boolean swapped = false;
